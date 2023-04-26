@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://8eoe5vvtqocy"]
+
+[ext_resource type="Material" uid="uid://cypxe62r5fxen" path="res://Shader/TextShaderMaterial.tres" id="1_lsnyn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mx3l4"]
+
+[sub_resource type="Animation" id="Animation_2ltau"]
+resource_name = "Bob"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 4.96213, -0.15739, -5.77735, 1, 1, 4.962, 3, -5.777, 2, 1, 4.96208, 0.360766, -5.77721)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_72te5"]
+_data = {
+"Bob": SubResource("Animation_2ltau")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iu1mh"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6kskr"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Map" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.0033, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+transform = Transform3D(0.857947, -0.504644, -0.0962307, 0.279767, 0.30184, 0.911385, -0.430879, -0.808843, 0.400146, 0, 3.0033, -1)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0033, -1)
+
+[node name="Outer Hull" type="CSGBox3D" parent="Map/CSGCombiner3D"]
+size = Vector3(19.0959, 11.4583, 18.012)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/CSGCombiner3D/Outer Hull"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2739, 0)
+operation = 2
+size = Vector3(17.9468, 16.3592, 16.311)
+
+[node name="Props" type="Node3D" parent="Map"]
+
+[node name="Floating Box" type="CSGBox3D" parent="Map/Props"]
+transform = Transform3D(0.952375, -0.304931, 0, 0.304931, 0.952375, 0, 0, 0, 1, 4.96213, -0.15739, -5.77735)
+material_override = SubResource("StandardMaterial3D_mx3l4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Map/Props/Floating Box"]
+autoplay = "Bob"
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_72te5")
+}
+
+[node name="Floating Box2" type="CSGBox3D" parent="Map/Props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.230099, -0.15739, -5.77735)
+material_override = SubResource("StandardMaterial3D_iu1mh")
+
+[node name="Floating Box3" type="CSGBox3D" parent="Map/Props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.79005, -0.15739, -5.77735)
+material_override = SubResource("StandardMaterial3D_6kskr")
+
+[node name="Post Processing Stack" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Effect 1" type="CanvasLayer" parent="Post Processing Stack"]
+
+[node name="ColorRect" type="ColorRect" parent="Post Processing Stack/Effect 1"]
+material = ExtResource("1_lsnyn")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.997974, 1.00709)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.0033, 1)

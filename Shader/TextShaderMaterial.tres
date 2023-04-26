@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cypxe62r5fxen"]
+
+[ext_resource type="Shader" uid="uid://c6xmm7v0op1ie" path="res://Shader/TextShader.tres" id="1_2vqdp"]
+
+[resource]
+shader = ExtResource("1_2vqdp")
+shader_parameter/Pixelization_Ammount = 50
+shader_parameter/Character_Count = 10
