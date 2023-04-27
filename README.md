@@ -17,5 +17,5 @@ Higher count character sets allow for greater brightness sampling.
 ![curve based brightness example](https://user-images.githubusercontent.com/10996715/234731590-e39a0614-742f-49a6-823c-8ad8990bcc82.png)
 Allows you to manage your brightness via curve to achieve the proper lighting for a given game.
 
-##Black and White/Color Support
+## Black and White/Color Support
 A toggle allowing you to select whether the scene should be rendered with color, or purely brightness information
